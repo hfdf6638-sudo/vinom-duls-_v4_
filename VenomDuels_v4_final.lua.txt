@@ -132,6 +132,60 @@ Screen.ResetOnSpawn   = false
 Screen.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 Screen.Parent         = CoreGui;
 
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
+
+-- GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "IntroMessage"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = CoreGui
+
+-- النص الرئيسي
+local mainText = Instance.new("TextLabel")
+mainText.Size = UDim2.new(1, 0, 0, 50)
+mainText.Position = UDim2.new(0, 0, 0.45, 0)
+mainText.BackgroundTransparency = 1
+mainText.Text = "FREE FOR 3 DAYS"
+mainText.TextColor3 = Color3.fromRGB(200, 160, 255)
+mainText.TextTransparency = 1
+mainText.Font = Enum.Font.GothamBlack
+mainText.TextScaled = true
+mainText.Parent = screenGui
+
+-- رابط الديسكورد
+local discordText = Instance.new("TextLabel")
+discordText.Size = UDim2.new(1, 0, 0, 30)
+discordText.Position = UDim2.new(0, 0, 0.52, 0)
+discordText.BackgroundTransparency = 1
+discordText.Text = "discord.gg/eUVxJghHA"
+discordText.TextColor3 = Color3.fromRGB(160, 120, 255)
+discordText.TextTransparency = 1
+discordText.Font = Enum.Font.GothamBold
+discordText.TextScaled = true
+discordText.Parent = screenGui
+
+-- Fade In
+local fadeIn1 = TweenService:Create(mainText, TweenInfo.new(1), {TextTransparency = 0})
+local fadeIn2 = TweenService:Create(discordText, TweenInfo.new(1), {TextTransparency = 0})
+
+fadeIn1:Play()
+fadeIn2:Play()
+
+-- انتظار 5 ثواني
+task.wait(5)
+
+-- Fade Out
+local fadeOut1 = TweenService:Create(mainText, TweenInfo.new(1), {TextTransparency = 1})
+local fadeOut2 = TweenService:Create(discordText, TweenInfo.new(1), {TextTransparency = 1})
+
+fadeOut1:Play()
+fadeOut2:Play()
+
+-- حذف بعد ما يختفي
+task.wait(1)
+screenGui:Destroy()
+
 -- Discord Billboard
 task.spawn(function()
     local function addDiscordBillboard(char)
